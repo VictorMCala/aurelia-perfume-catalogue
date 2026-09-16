@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# Work artifacts
+_audit.py
+images/_audit.jpg
+images/_contact.jpg
+images/_probe.jpg

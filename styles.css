@@ -1,0 +1,572 @@
+/* =========================================================================
+   AURÉLIA — MAISON DE PARFUMS
+   Luxury editorial design system · A4 portrait · print-ready
+   ========================================================================= */
+
+/* ----------  DESIGN TOKENS  ---------- */
+:root {
+  /* Palette */
+  --ivory:        #F7F3EC;
+  --champagne:    #C6A15B;
+  --champagne-lt: #E4CF9E;
+  --emerald:      #0E3B32;
+  --matte-black:  #14110F;
+  --beige:        #D9C7A8;
+  --rose-gold:    #B76E79;
+  --burgundy:     #5A1A2B;
+  --midnight:     #10203A;
+  --ink:          #211D18;
+
+  /* Typography */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-sub:     "Cormorant Garamond", Georgia, serif;
+  --font-script:  "Pinyon Script", "Apple Chancery", cursive;
+  --font-body:    "EB Garamond", Georgia, serif;
+
+  /* Page geometry (A4) */
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --margin: 18mm;
+}
+
+/* ----------  RESET  ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #3a3733;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 12pt;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ----------  PAGE FRAME  ---------- */
+.page {
+  position: relative;
+  width: var(--page-w);
+  height: var(--page-h);
+  margin: 10mm auto;
+  background: var(--ivory);
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,.45);
+  page-break-after: always;
+  break-after: page;
+}
+.page:last-child { page-break-after: auto; }
+
+.pad {
+  position: absolute;
+  inset: var(--margin);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------  TYPOGRAPHY HELPERS  ---------- */
+.script     { font-family: var(--font-script); font-weight: 400; }
+.display    { font-family: var(--font-display); }
+.sub        { font-family: var(--font-sub); }
+.upper      { text-transform: uppercase; }
+.tracked    { letter-spacing: .42em; }
+.tracked-sm { letter-spacing: .22em; }
+.center     { text-align: center; }
+.gold       { color: var(--champagne); }
+.italic     { font-style: italic; }
+
+.eyebrow {
+  font-family: var(--font-sub);
+  text-transform: uppercase;
+  letter-spacing: .5em;
+  font-size: 10pt;
+  color: var(--champagne);
+}
+
+.rule {
+  width: 64px; height: 1px;
+  background: var(--champagne);
+  border: 0;
+}
+.rule.center { margin-left: auto; margin-right: auto; }
+.rule.long { width: 120px; }
+
+/* Gold hairline frame used on formal pages */
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 10mm;
+  border: 1px solid rgba(198,161,91,.55);
+  pointer-events: none;
+}
+.frame.double::before {
+  content: "";
+  position: absolute;
+  inset: 12.5mm;
+  border: 1px solid rgba(198,161,91,.25);
+  pointer-events: none;
+}
+
+/* ----------  WORDMARK  ---------- */
+.wordmark { text-align: center; line-height: 1; }
+.wordmark .name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: .32em;
+  text-transform: uppercase;
+}
+.wordmark .maison {
+  font-family: var(--font-sub);
+  text-transform: uppercase;
+  letter-spacing: .48em;
+  font-size: 9pt;
+  margin-top: 6mm;
+  color: var(--champagne);
+}
+.monogram {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: .04em;
+  border: 1px solid var(--champagne);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   COVER
+   ========================================================================== */
+.cover {
+  background:
+    radial-gradient(120% 90% at 50% 8%, rgba(198,161,91,.20), transparent 55%),
+    radial-gradient(140% 120% at 50% 120%, rgba(198,161,91,.14), transparent 60%),
+    linear-gradient(160deg, #17130f 0%, #241c14 45%, #120f0c 100%);
+  color: var(--ivory);
+}
+.cover .pad { align-items: center; justify-content: space-between; text-align: center; }
+.cover .name-lg {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 52pt;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #f4e4bd 0%, #c6a15b 55%, #8a6a33 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Decorative particles / crystal glints */
+.glints { position: absolute; inset: 0; pointer-events: none; opacity: .55; }
+.glints span {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--champagne-lt);
+  box-shadow: 0 0 8px 2px rgba(228,207,158,.6);
+}
+
+/* ==========================================================================
+   SHARED CONTENT PAGES
+   ========================================================================== */
+.page-num {
+  position: absolute;
+  bottom: 9mm; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-sub);
+  letter-spacing: .3em;
+  font-size: 9pt;
+  color: var(--champagne);
+}
+.running-head {
+  position: absolute;
+  top: 9mm; left: 0; right: 0;
+  text-align: center;
+  font-family: var(--font-sub);
+  text-transform: uppercase;
+  letter-spacing: .5em;
+  font-size: 8pt;
+  color: rgba(33,29,24,.55);
+}
+
+.h-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30pt;
+  line-height: 1.08;
+  letter-spacing: .01em;
+}
+.h-lg { font-size: 40pt; }
+.lede {
+  font-family: var(--font-sub);
+  font-size: 16pt;
+  font-style: italic;
+  color: #4a4137;
+}
+.body-col p { margin-bottom: 5mm; }
+.body-col p.first::first-letter {
+  font-family: var(--font-display);
+  font-size: 46pt;
+  line-height: .8;
+  float: left;
+  padding: 4px 10px 0 0;
+  color: var(--champagne);
+}
+.two-col { column-count: 2; column-gap: 10mm; }
+
+.signature {
+  font-family: var(--font-script);
+  font-size: 34pt;
+  color: var(--ink);
+  line-height: 1;
+}
+
+/* ==========================================================================
+   COLLECTION DIVIDERS
+   ========================================================================== */
+.divider { color: var(--ivory); }
+.divider .pad { align-items: center; justify-content: center; text-align: center; }
+.divider .h-section { font-size: 46pt; }
+.divider .idx {
+  font-family: var(--font-display);
+  font-size: 120pt;
+  line-height: 1;
+  opacity: .16;
+  position: absolute;
+  top: 26mm; left: 0; right: 0; text-align: center;
+}
+.divider.women   { background: linear-gradient(155deg,#3a1522 0%, #5a1a2b 50%, #2a0f18 100%); }
+.divider.men     { background: linear-gradient(155deg,#0b1a2e 0%, #10203a 50%, #070f1c 100%); }
+.divider.unisex  { background: linear-gradient(155deg,#0c2f28 0%, #0e3b32 50%, #071c18 100%); }
+
+/* ==========================================================================
+   PERFUME PAGES — visual worlds
+   ========================================================================== */
+.fragrance { color: var(--ivory); }
+.fragrance .pad { z-index: 3; }
+
+/* --------------------------------------------------------------------------
+   FLACON SYSTEM
+   Each fragrance gets a distinct silhouette (shape) + cap + liquid colour.
+   If a real product photo is supplied (<img class="photo">), it replaces the
+   drawn artwork automatically. Drop files in /images and add class "has-photo".
+   -------------------------------------------------------------------------- */
+.bottle {
+  position: relative;
+  width: 46mm; height: 78mm;
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,.5));
+}
+
+/* Real photo overlay (shown only when provided) */
+.bottle .photo {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:contain; z-index:6; display:none;
+}
+.bottle.has-photo .photo { display:block; }
+.bottle.has-photo {
+  filter: drop-shadow(0 22px 30px rgba(0,0,0,.55));
+}
+.bottle.has-photo .body,
+.bottle.has-photo .shoulder,
+.bottle.has-photo .cap,
+.bottle.has-photo .label,
+.bottle.has-photo .collar { display:none; }
+
+/* Base glass body */
+.bottle .body {
+  position: absolute; bottom: 0; left: 6%; right: 6%;
+  height: 56mm; border-radius: 3mm;
+  background:
+    linear-gradient(105deg, rgba(255,255,255,.42) 0%, rgba(255,255,255,.06) 22%, rgba(255,255,255,0) 45%),
+    var(--flacon, linear-gradient(160deg,#c6a15b,#8a6a33));
+  border: 1px solid rgba(255,255,255,.28);
+  overflow: hidden;
+}
+.bottle .body::after {
+  content:""; position:absolute; top:0; left:16%; width:9%; height:100%;
+  background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,0));
+  filter: blur(2px);
+}
+.bottle .shoulder {
+  position:absolute; bottom:55mm; left:30%; right:30%; height:5mm;
+  background: var(--flacon, #8a6a33);
+  border: 1px solid rgba(255,255,255,.22);
+}
+.bottle .cap {
+  position:absolute; bottom:60mm; left:34%; right:34%; height:13mm;
+  border-radius: 1.5mm;
+  background: linear-gradient(160deg,#f1dfab,#8a6a33);
+  border: 1px solid rgba(255,255,255,.3);
+  z-index:2;
+}
+.bottle .label {
+  position:absolute; bottom: 15mm; left:50%; transform:translateX(-50%);
+  text-align:center; width: 74%; z-index:3;
+  color: rgba(20,17,15,.82);
+}
+.bottle .label .m {
+  font-family: var(--font-display); font-weight:700;
+  font-size: 8pt; letter-spacing:.16em; text-transform:uppercase;
+}
+.bottle .label .n {
+  font-family: var(--font-sub); font-size: 6.5pt;
+  letter-spacing:.12em; text-transform:uppercase; margin-top:1mm;
+  color: rgba(20,17,15,.6);
+}
+
+/* ---- SHAPE VARIANTS (distinct silhouette per fragrance) ---- */
+
+/* Wide, flat rectangular flacon (Baccarat Rouge) */
+.b-flat .body { left:2%; right:2%; height:52mm; border-radius:2mm; }
+.b-flat .shoulder { bottom:51mm; left:38%; right:38%; height:4mm; }
+.b-flat .cap { bottom:55mm; left:40%; right:40%; height:9mm; }
+
+/* Tall slim column (Bleu, MYSLF, Sauvage) */
+.b-column .body { left:16%; right:16%; height:60mm; border-radius:2mm; }
+.b-column .shoulder { bottom:59mm; left:34%; right:34%; height:3mm; }
+.b-column .cap { bottom:61mm; left:36%; right:36%; height:15mm; }
+
+/* Rounded soft-square (Coco, Sí, Paradoxe) */
+.b-soft .body { left:8%; right:8%; height:54mm; border-radius:8mm; }
+.b-soft .cap { bottom:57mm; left:38%; right:38%; height:11mm; border-radius:2mm; }
+
+/* Amphora / teardrop with gold collar (J'adore) */
+.b-amphora .body {
+  left:14%; right:14%; height:52mm;
+  border-radius: 26% 26% 44% 44% / 40% 40% 58% 58%;
+}
+.b-amphora .collar {
+  position:absolute; bottom:47mm; left:38%; right:38%; height:9mm; z-index:2;
+  background: repeating-linear-gradient(180deg,#f1dfab 0 1.4mm,#8a6a33 1.4mm 2.8mm);
+  border-radius:1mm;
+}
+.b-amphora .cap { bottom:56mm; left:42%; right:42%; height:8mm; border-radius:1mm; }
+.b-amphora .shoulder { display:none; }
+
+/* Stiletto / tapered heel (Good Girl) */
+.b-stiletto .body {
+  left:20%; right:20%; height:58mm;
+  clip-path: polygon(0 0, 100% 0, 62% 100%, 38% 100%);
+  border-radius:0;
+}
+.b-stiletto .shoulder { bottom:57mm; left:38%; right:38%; height:3mm; }
+.b-stiletto .cap { bottom:59mm; left:40%; right:40%; height:16mm; width:auto;
+  clip-path: polygon(20% 0,80% 0,60% 100%,40% 100%); }
+
+/* Faceted / angled shoulders (Delina, Erba Pura, Angels' Share) */
+.b-faceted .body {
+  left:10%; right:10%; height:54mm;
+  clip-path: polygon(0 14%, 22% 0, 78% 0, 100% 14%, 100% 100%, 0 100%);
+  border-radius:0 0 3mm 3mm;
+}
+.b-faceted .cap { bottom:53mm; left:40%; right:40%; height:10mm; border-radius:1mm; }
+.b-faceted .shoulder { display:none; }
+
+/* Round crest bottle (Parfums de Marly — Layton) */
+.b-crest .body {
+  left:14%; right:14%; height:50mm;
+  border-radius: 30% 30% 42% 42% / 22% 22% 30% 30%;
+}
+.b-crest .shoulder { bottom:48mm; left:40%; right:40%; height:4mm; }
+.b-crest .cap { bottom:51mm; left:40%; right:40%; height:12mm; border-radius:2mm 2mm 1mm 1mm; }
+
+/* Cylinder (Tom Ford Private Blend — Oud Wood, Tobacco Vanille) */
+.b-cylinder .body { left:20%; right:20%; height:56mm; border-radius:3mm; }
+.b-cylinder .shoulder { display:none; }
+.b-cylinder .cap { bottom:56mm; left:20%; right:20%; height:14mm; border-radius:2mm 2mm 0 0;
+  background: linear-gradient(160deg,#3a2c1e,#160f08); }
+
+/* Ornate oval (Xerjoff Casamorati — Naxos, Sospiro — Erba Pura alt) */
+.b-oval .body { left:12%; right:12%; height:50mm; border-radius: 45%/22%; }
+.b-oval .shoulder { bottom:48mm; left:40%; right:40%; height:4mm; }
+.b-oval .cap { bottom:51mm; left:38%; right:38%; height:11mm; border-radius:50% 50% 2mm 2mm;
+  background: linear-gradient(160deg,#f1dfab,#a8842f); }
+
+/* Rounded-shoulder decanter (Creed Aventus) */
+.b-decanter .body { left:10%; right:10%; height:54mm; border-radius: 10mm 10mm 3mm 3mm; }
+.b-decanter .shoulder { bottom:52mm; left:36%; right:36%; height:4mm; }
+.b-decanter .cap { bottom:55mm; left:38%; right:38%; height:11mm; }
+
+/* Studded cap (Valentino Born In Roma) */
+.b-studcap .cap {
+  background:
+    radial-gradient(circle at 30% 35%, #fff 0 .6mm, transparent .7mm),
+    radial-gradient(circle at 65% 60%, #fff 0 .6mm, transparent .7mm),
+    linear-gradient(160deg,#d9c7a8,#8a7a5a);
+  height:14mm;
+}
+
+/* ---- CAP COLOUR MODIFIERS ---- */
+.cap-gold   .cap { background: linear-gradient(160deg,#f1dfab,#8a6a33); }
+.cap-silver .cap { background: linear-gradient(160deg,#eef1f4,#7d858c); }
+.cap-black  .cap { background: linear-gradient(160deg,#3a352f,#0d0b09); }
+.cap-wood   .cap { background: linear-gradient(160deg,#5a4028,#241708); }
+
+/* Fragrance meta card */
+.frag-head .num {
+  font-family: var(--font-sub); letter-spacing:.4em; font-size: 10pt;
+  color: var(--champagne); text-transform: uppercase;
+}
+.frag-head .house {
+  font-family: var(--font-sub); text-transform: uppercase;
+  letter-spacing:.4em; font-size: 10pt; margin-top: 4mm; opacity:.85;
+}
+.frag-head .title {
+  font-family: var(--font-display); font-weight:700;
+  font-size: 34pt; line-height:1.05; margin-top: 3mm;
+}
+.frag-head .kicker {
+  font-family: var(--font-script); font-size: 26pt;
+  color: var(--champagne-lt); margin-top: 2mm;
+}
+.narrative {
+  font-family: var(--font-body);
+  font-size: 11.5pt; line-height: 1.62;
+  color: rgba(247,243,236,.92);
+  max-width: 92mm;
+}
+.narrative + .narrative { margin-top: 3mm; }
+
+.notes { display: flex; gap: 8mm; margin-top: 2mm; }
+.notes .col .lbl {
+  font-family: var(--font-sub); text-transform: uppercase;
+  letter-spacing:.28em; font-size: 8.5pt; color: var(--champagne);
+  border-bottom: 1px solid rgba(198,161,91,.4);
+  padding-bottom: 1.5mm; margin-bottom: 2mm;
+}
+.notes .col p { font-family: var(--font-sub); font-size: 11pt; font-style: italic; }
+
+.price-tag { display: flex; align-items: baseline; gap: 5mm; }
+.price-tag .size { font-family: var(--font-sub); letter-spacing:.2em; font-size:10pt; opacity:.8; }
+.price-tag .price { font-family: var(--font-display); font-size: 18pt; color: var(--champagne-lt); }
+.price-tag .czk { font-family: var(--font-sub); font-size: 10pt; opacity:.7; }
+
+.family-chip {
+  display:inline-block;
+  font-family: var(--font-sub); text-transform: uppercase;
+  letter-spacing:.3em; font-size: 8.5pt;
+  border:1px solid rgba(247,243,236,.4);
+  padding: 2mm 5mm; border-radius: 40px;
+}
+
+/* Atmospheric overlay layers */
+.world { position:absolute; inset:0; z-index:1; }
+.world .veil { position:absolute; inset:0; }
+.vignette::before{
+  content:""; position:absolute; inset:0; z-index:2;
+  background: radial-gradient(120% 100% at 30% 30%, transparent 40%, rgba(0,0,0,.45) 100%);
+  pointer-events:none;
+}
+
+/* Per-fragrance worlds */
+.w-baccarat { background: radial-gradient(90% 80% at 70% 20%, rgba(255,120,120,.5), transparent 55%), linear-gradient(150deg,#4a0d10,#8a1418 45%,#2a0708); }
+.w-aventus  { background: radial-gradient(80% 70% at 25% 25%, rgba(120,160,120,.28), transparent 55%), linear-gradient(150deg,#0b1a12,#14261a 45%,#070f0a); }
+.w-delina   { background: radial-gradient(90% 80% at 70% 25%, rgba(210,140,160,.45), transparent 55%), linear-gradient(150deg,#3a1622,#6a2a3e 45%,#26101a); }
+.w-libre    { background: radial-gradient(90% 80% at 30% 25%, rgba(120,150,220,.35), transparent 55%), linear-gradient(150deg,#141b2e,#2a2140 45%,#0c1020); }
+.w-blackopium{background: radial-gradient(80% 70% at 70% 20%, rgba(198,161,91,.4), transparent 55%), linear-gradient(150deg,#0a0908,#241a12 45%,#070605); }
+.w-coco     { background: radial-gradient(90% 80% at 30% 20%, rgba(198,161,91,.35), transparent 55%), linear-gradient(150deg,#241a12,#3a2a18 45%,#120c08); }
+.w-sauvage  { background: radial-gradient(90% 80% at 70% 20%, rgba(120,150,180,.4), transparent 55%), linear-gradient(150deg,#101c22,#22323a 45%,#0a1216); }
+.w-oudwood  { background: radial-gradient(70% 60% at 30% 25%, rgba(150,110,70,.35), transparent 55%), linear-gradient(150deg,#0d0a08,#1f150e 45%,#070504); }
+.w-tobacco  { background: radial-gradient(80% 70% at 70% 25%, rgba(180,120,60,.4), transparent 55%), linear-gradient(150deg,#1a0e08,#3a2010 45%,#0e0704); }
+.w-naxos    { background: radial-gradient(90% 80% at 70% 20%, rgba(240,180,90,.5), transparent 55%), linear-gradient(150deg,#5a2a10,#a85a1e 45%,#2a1408); }
+.w-bleu     { background: radial-gradient(90% 80% at 30% 20%, rgba(90,130,190,.45), transparent 55%), linear-gradient(150deg,#0a1424,#16283f 45%,#060c16); }
+.w-goodgirl { background: radial-gradient(80% 70% at 70% 20%, rgba(198,161,91,.35), transparent 55%), linear-gradient(150deg,#0a0908,#1c1512 45%,#050404); }
+.w-erbapura { background: radial-gradient(90% 80% at 70% 25%, rgba(240,170,110,.45), transparent 55%), linear-gradient(150deg,#3a1c10,#7a3a1a 45%,#1c0e06); }
+.w-jadore   { background: radial-gradient(90% 80% at 30% 20%, rgba(230,200,120,.45), transparent 55%), linear-gradient(150deg,#2a2010,#4a3a18 45%,#141006); }
+.w-si       { background: radial-gradient(90% 80% at 70% 25%, rgba(150,60,80,.4), transparent 55%), linear-gradient(150deg,#2a1018,#5a1e2e 45%,#160810); }
+.w-roma     { background: radial-gradient(90% 80% at 30% 25%, rgba(150,150,170,.3), transparent 55%), linear-gradient(150deg,#181820,#2e2e3a 45%,#0c0c12); }
+.w-myslf    { background: radial-gradient(90% 80% at 70% 20%, rgba(120,150,120,.3), transparent 55%), linear-gradient(150deg,#101810,#22301f 45%,#080c08); }
+.w-paradoxe { background: radial-gradient(90% 80% at 30% 20%, rgba(220,210,200,.35), transparent 55%), linear-gradient(150deg,#20201e,#38362f 45%,#101010); }
+.w-layton   { background: radial-gradient(90% 80% at 70% 20%, rgba(120,150,210,.35), transparent 55%), linear-gradient(150deg,#141a2c,#28304a 45%,#0a0e18); }
+.w-angels   { background: radial-gradient(80% 70% at 30% 25%, rgba(180,120,60,.4), transparent 55%), linear-gradient(150deg,#1a1008,#3a2410 45%,#0c0704); }
+
+/* Layout variants (A–H) */
+.layout-hero .pad     { justify-content: center; }
+.layout-hero .bottle  { position:absolute; right: var(--margin); bottom: var(--margin); }
+
+.layout-split .pad { display:grid; grid-template-columns: 1fr 1fr; align-items:center; gap: 8mm; }
+.layout-split .bottle { justify-self:center; }
+
+.layout-editorial .pad { justify-content: space-between; }
+.layout-editorial .top { display:flex; justify-content: space-between; align-items:flex-start; }
+
+.layout-museum .pad { align-items:center; text-align:center; justify-content:center; gap: 6mm; }
+.layout-museum .bottle { margin: 0 auto; }
+
+.layout-lifestyle .pad { justify-content:flex-end; }
+.layout-lifestyle .bottle { position:absolute; right: 14mm; top: 26mm; }
+
+.layout-campaign .pad { justify-content: flex-start; }
+.layout-campaign .bigtype {
+  font-family: var(--font-display); font-weight:700;
+  font-size: 58pt; line-height:.98; letter-spacing:.01em;
+  mix-blend-mode: screen; opacity:.92;
+}
+.layout-campaign .bottle { position:absolute; right: 20mm; bottom: 20mm; }
+
+.stack > * + * { margin-top: 5mm; }
+.mt-auto { margin-top: auto; }
+.flex-between { display:flex; justify-content:space-between; align-items:flex-end; }
+.gap-row { display:flex; gap: 10mm; align-items:center; }
+
+/* ==========================================================================
+   SERVICE / INFO PAGES
+   ========================================================================== */
+.info { background: var(--ivory); }
+.grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap: 8mm; }
+.grid-2 { display:grid; grid-template-columns: repeat(2,1fr); gap: 10mm; }
+.card-lux {
+  border: 1px solid rgba(198,161,91,.5);
+  padding: 8mm 7mm;
+}
+.card-lux h3 {
+  font-family: var(--font-display); font-weight:700; font-size: 15pt;
+  margin-bottom: 3mm;
+}
+.card-lux .n { font-family: var(--font-script); font-size: 22pt; color: var(--champagne); }
+
+.education-row { display:flex; gap: 6mm; align-items:flex-start; margin-bottom: 6mm; }
+.education-row .step {
+  font-family: var(--font-display); font-weight:700; font-size: 24pt;
+  color: var(--champagne); min-width: 18mm;
+}
+
+/* Creative Director report */
+.report { background: linear-gradient(160deg,#17130f,#221a12); color: var(--ivory); }
+.score-grid { display:grid; grid-template-columns: repeat(2,1fr); gap: 4mm 10mm; }
+.score-row { display:flex; justify-content: space-between; align-items:baseline;
+  border-bottom: 1px dotted rgba(198,161,91,.4); padding-bottom: 2mm; }
+.score-row .lbl { font-family: var(--font-sub); letter-spacing:.12em; font-size: 11pt; }
+.score-row .val { font-family: var(--font-display); font-size: 15pt; color: var(--champagne-lt); }
+.final-score {
+  font-family: var(--font-display); font-weight:700; font-size: 64pt;
+  color: var(--champagne-lt); line-height:1;
+}
+
+/* Back cover */
+.back { background: linear-gradient(160deg,#120f0c,#211812); color: var(--ivory); }
+.back .pad { align-items:center; justify-content:space-between; text-align:center; }
+
+/* ==========================================================================
+   PRINT
+   ========================================================================== */
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+@media print {
+  html, body { background: #fff; }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    width: 210mm; height: 297mm;
+  }
+  .no-print { display: none !important; }
+}
+
+/* Screen-only helper bar */
+.toolbar {
+  position: fixed; top: 12px; right: 12px; z-index: 999;
+  background: rgba(20,17,15,.9); color: var(--ivory);
+  border: 1px solid var(--champagne);
+  font-family: var(--font-sub); letter-spacing:.15em; font-size: 11px;
+  padding: 8px 14px; border-radius: 40px;
+}
